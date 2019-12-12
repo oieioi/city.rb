@@ -1,10 +1,13 @@
-require_relative './tile'
+require_relative './absolute_tile'
 
 module City
   module Tiles
-    class Wall < Tile
+    class Wall < AbsoluteTile
       def to_s
         '_'
+      end
+      def collide?
+        true
       end
     end
   end
