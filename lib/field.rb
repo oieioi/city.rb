@@ -10,8 +10,9 @@ module City
     end
 
     def init_tiles
-      x = 25
-      y = 50
+      x = 20
+      y = 20
+
       tiles = x.times.map { [] }
       tiles.map! { [Tiles::Wall.new] + y.times.map { |y| Tiles::Floor.new } + [Tiles::Wall.new] }
       tiles.unshift([Tiles::Wall.new] + y.times.map { |y| Tiles::Wall.new } + [Tiles::Wall.new])
