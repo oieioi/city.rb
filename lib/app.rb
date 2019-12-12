@@ -1,12 +1,12 @@
 require 'io/console'
-require_relative './player'
+require_relative './movables/player'
 require_relative './field'
 
 module City
   class App
     def initialize
       @times = 0
-      @player = Player.new('oieioi')
+      @player = Movables::Player.new('oieioi')
       @field = Field.new({ x: 2, y: 2, instance: @player })
 
       print @field.to_s

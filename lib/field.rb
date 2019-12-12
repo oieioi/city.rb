@@ -1,13 +1,12 @@
-require_relative './wall'
-require_relative './floor'
+require_relative './tiles.rb'
 
 module City
   class Field
     def initialize(player, x = 25, y = 25)
       @tiles = x.times.map { [] }
-      @tiles.map! { [Wall.new] + y.times.map { |y| Floor.new } + [Wall.new] }
-      @tiles.unshift([Wall.new] + y.times.map { |y| Wall.new } + [Wall.new])
-      @tiles.push( [Wall.new] + y.times.map { |y| Wall.new } + [Wall.new] )
+      @tiles.map! { [Tiles::Wall.new] + y.times.map { |y| Tiles::Floor.new } + [Tiles::Wall.new] }
+      @tiles.unshift([Tiles::Wall.new] + y.times.map { |y| Tiles::Wall.new } + [Tiles::Wall.new])
+      @tiles.push( [Tiles::Wall.new] + y.times.map { |y| Tiles::Wall.new } + [Tiles::Wall.new] )
       @player = player[:instance]
       @player_position_x = player[:x]
       @player_position_y = player[:y]
