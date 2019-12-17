@@ -19,14 +19,21 @@ module City
     def init_movables(path = './lib/data/movables.txt')
       [
         {x: 5, y: 5, instance: Movables::Dead.new('死者', 'もう死んでます')},
-        {x: 8, y: 3, instance: Movables::Dead.new('死者', '鶏肉が食べたかったです')},
+        {x: 8, y: 3, instance: Movables::Dead.new('死者', 'お肉が食べたかったです')},
+        {x: 9, y: 3, instance: Movables::Dead.new('死者', <<-WORD )}
+死んだら、埋めて下さい。
+大きな真珠貝で穴を掘って。
+そうして天から落ちて来る星の破片を墓標に置いて下さい。
+そうして墓の傍に待っていて下さい。また逢いに来ますから
+百年、私の墓の傍に坐って待っていて下さい。きっと逢いに来ますから
+WORD
       ]
     end
 
     def [](x, y)
-      if @tiles[x].nil?
-        return nil
-      end
+      return nil if x.negative? || y.negative?
+      return nil if @tiles[x].nil?
+
       @tiles[x][y]
     end
 

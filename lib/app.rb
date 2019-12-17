@@ -5,25 +5,23 @@ require_relative './field'
 module City
   class App
     INITIAL_TEXT = 'h: left, j: down, k: up, l: right, q: quit'.freeze
+
     def initialize
       @times = 0
       @player = Movables::Player.new('oieioi')
       @field = Field.new({ x: 2, y: 2, instance: @player })
-      @text = INITIAL_TEXT
 
       disp
 
       loop {
         message = next_turn(input_command)
-        @text = if message
-                  message
-                else
-                  INITIAL_TEXT
-                end
-        disp
+        disp(message)
       }
     rescue Interrupt
       puts 'end'
+    end
+
+    def disp_message
     end
 
     def input_command
@@ -42,15 +40,26 @@ module City
       end
     end
 
-    def disp
+    def disp(message = nil)
       field = @field.to_s
-      text = @text
 
-      # clean console
-      puts "\e[H\e[2J"
 
+      if message
+        message.split("\n").each { |line|
+          clean_console
+          print field
+          print "#{line} (enter some key)"
+          input_command
+        }
+      end
+
+      clean_console
       print field
-      print text
+      print INITIAL_TEXT
+    end
+
+    def clean_console
+      puts "\e[H\e[2J"
     end
   end
 end

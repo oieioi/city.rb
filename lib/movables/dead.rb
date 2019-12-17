@@ -1,7 +1,7 @@
 module City
   module Movables
     class Dead
-      def initialize(name = '死者', words = 'もう死んでいます')
+      def initialize(name, words)
         @name = name
         @words = words
       end
