@@ -8,7 +8,7 @@ module City
 
     def initialize
       @times = 0
-      @player = Movables::Player.new('oieioi')
+      @player = Movables::Player.new('you')
       @field = Field.new({ x: 2, y: 2, instance: @player })
 
       disp
@@ -19,9 +19,6 @@ module City
       }
     rescue Interrupt
       puts 'end'
-    end
-
-    def disp_message
     end
 
     def input_command
@@ -35,7 +32,6 @@ module City
       when :k then @field.player_go_up
       when :l then @field.player_go_right
       when :q then raise Interrupt
-      #when :a then @player.action(@field)
       else "#{command} is not valid command."
       end
     end
@@ -43,14 +39,8 @@ module City
     def disp(message = nil)
       field = @field.to_s
 
-
       if message
-        message.split("\n").each { |line|
-          clean_console
-          print field
-          print "#{line} (enter some key)"
-          input_command
-        }
+        disp_message(message, field)
       end
 
       clean_console
@@ -60,6 +50,21 @@ module City
 
     def clean_console
       puts "\e[H\e[2J"
+    end
+
+    def disp_message(message, field)
+      lines = message.split("\n")
+      lines << ""
+      lines.each_cons(2) { |line, next_line|
+        clean_console
+        print field
+        if next_line.empty?
+          print "#{line} -- press any key --"
+        else
+          print "#{line} -- continue --"
+        end
+        input_command
+      }
     end
   end
 end
