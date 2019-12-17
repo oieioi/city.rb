@@ -1,5 +1,13 @@
 module City
   module Tiles
+    def self.factory(char)
+      # TODO
+      case char
+      when '.' then Floor.new
+      when '_' then Wall.new
+      else Empty.new
+      end
+    end
   end
 end
 

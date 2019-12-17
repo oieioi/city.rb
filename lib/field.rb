@@ -1,4 +1,5 @@
-require_relative './tiles.rb'
+require_relative './tiles'
+require_relative './field_reader'
 
 module City
   class Field
@@ -9,15 +10,8 @@ module City
       @player_position_y = player[:y]
     end
 
-    def init_tiles
-      x = 20
-      y = 20
-
-      tiles = x.times.map { [] }
-      tiles.map! { [Tiles::Wall.new] + y.times.map { |y| Tiles::Floor.new } + [Tiles::Wall.new] }
-      tiles.unshift([Tiles::Wall.new] + y.times.map { |y| Tiles::Wall.new } + [Tiles::Wall.new])
-      tiles.push( [Tiles::Wall.new] + y.times.map { |y| Tiles::Wall.new } + [Tiles::Wall.new] )
-      tiles
+    def init_tiles(path = './lib//data/field.txt')
+      FieldReader.read(path)
     end
 
     def [](x, y)
