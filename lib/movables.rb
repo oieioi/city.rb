@@ -3,6 +3,6 @@ module City
   end
 end
 
-Dir[File.expand_path('./movables', __FILE__) << '/*.rb'].each do |file|
+Dir[File.expand_path('../movables', __FILE__) << '/*.rb'].each do |file|
   require file
 end

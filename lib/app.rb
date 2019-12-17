@@ -4,19 +4,23 @@ require_relative './field'
 
 module City
   class App
+    INITIAL_TEXT = 'h: left, j: down, k: up, l: right, q: quit'.freeze
     def initialize
       @times = 0
       @player = Movables::Player.new('oieioi')
       @field = Field.new({ x: 2, y: 2, instance: @player })
+      @text = INITIAL_TEXT
 
-      print @field.to_s
+      disp
 
       loop {
-        next_turn input_command
-        field_string = @field.to_s
-        # clean console
-        puts "\e[H\e[2J"
-        print field_string
+        message = next_turn(input_command)
+        @text = if message
+                  message
+                else
+                  INITIAL_TEXT
+                end
+        disp
       }
     rescue Interrupt
       puts 'end'
@@ -34,8 +38,19 @@ module City
       when :l then @field.player_go_right
       when :q then raise Interrupt
       #when :a then @player.action(@field)
-      else puts 'not!'
+      else "#{command} is not valid command."
       end
+    end
+
+    def disp
+      field = @field.to_s
+      text = @text
+
+      # clean console
+      puts "\e[H\e[2J"
+
+      print field
+      print text
     end
   end
 end
