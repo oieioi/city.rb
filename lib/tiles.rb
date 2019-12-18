@@ -4,7 +4,9 @@ module City
       # TODO
       case char
       when '.' then Floor.new
-      when '_' then Wall.new
+      when '-' then WallUpper.new
+      when '|' then WallSider.new
+      when ']' then Grave.new
       else Empty.new
       end
     end

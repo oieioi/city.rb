@@ -2,12 +2,20 @@ require_relative './absolute_tile'
 
 module City
   module Tiles
-    class Wall < AbsoluteTile
-      def to_s
-        '_'
+    class WallSider < AbsoluteTile
+      def initialize
       end
+
+      def to_s
+        '|'
+      end
+
       def collide?
         true
+      end
+
+      def collision_reason
+        '壁だ'
       end
     end
   end

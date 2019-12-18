@@ -10,6 +10,10 @@ module City
         "#{@name}「#{@words}"
       end
 
+      def collision_reason
+        '死体がある'
+      end
+
       def to_s
         '&'
       end

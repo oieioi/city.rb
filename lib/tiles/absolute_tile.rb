@@ -7,6 +7,10 @@ module City
       def collide?
         raise 'yet not implemented'
       end
+
+      def do
+        'なに？'
+      end
     end
   end
 end

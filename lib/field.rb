@@ -55,7 +55,9 @@ WORD
     def player_move_or_talk(x, y)
       target_tile = self[x, y]
       return if target_tile.nil?
-      return if target_tile.collide?
+      if target_tile.collide?
+        return target_tile.collision_reason
+      end
 
       target_movable = movables(x, y)
       if target_movable
@@ -83,6 +85,21 @@ WORD
     def player_go_left
       player_move_or_talk(@player_position_x, @player_position_y - 1)
     end
+    def player_go_up_right
+      player_move_or_talk(@player_position_x - 1, @player_position_y + 1)
+    end
+    def player_go_up_left
+      player_move_or_talk(@player_position_x - 1, @player_position_y - 1)
+    end
+    def player_go_down_right
+      player_move_or_talk(@player_position_x + 1, @player_position_y + 1)
+    end
+    def player_go_down_left
+      player_move_or_talk(@player_position_x - 1, @player_position_y + 1)
+    end
+
+
+
 
     def movables(x, y)
       @movables.each do |m|

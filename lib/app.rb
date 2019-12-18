@@ -31,6 +31,11 @@ module City
       when :j then @field.player_go_down
       when :k then @field.player_go_up
       when :l then @field.player_go_right
+      when :u then @field.player_go_up_right
+      when :y then @field.player_go_up_left
+      when :n then @field.player_go_down_right
+      when :b then @field.player_go_down_left
+      when :x then @field.player_do
       when :q then raise Interrupt
       else "#{command} is not valid command."
       end
